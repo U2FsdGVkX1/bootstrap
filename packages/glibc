@@ -1,0 +1,37 @@
+PKGNAME=glibc
+PKGVER=2.37
+URL="https://ftp.gnu.org/gnu/glibc/glibc-$PKGVER.tar.xz"
+SOURCE=${URL##*/}
+SHA256SUM=2257eff111a1815d74f46856daaf40b019c1e553156c69d48ba0cbfc1bb91a43
+DEPENDS=(gcc linux-headers)
+
+EXTRACT() {
+    local src=$1
+    if [ ! -f configure ]; then
+        tar --strip-components 1 -xf $src
+    fi
+}
+
+PREPARE() {
+    rm -rf build && mkdir -p build
+    pushd build
+    if [ $STAGE == 1 ]; then
+        ../configure --host=$ARCH --prefix=/usr --with-headers=$PREFIX/usr/include \
+                     libc_cv_slibdir=/usr/lib
+    fi
+    popd
+}
+
+BUILD() {
+    pushd build
+    make -j$J
+    popd
+}
+
+INSTALL() {
+    pushd build
+    if [ $STAGE == 1 ]; then
+        make DESTDIR=$PREFIX install -j$J
+    fi
+    popd
+}

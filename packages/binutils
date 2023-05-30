@@ -1,0 +1,37 @@
+PKGNAME=binutils
+PKGVER=2.40
+URL="https://ftp.gnu.org/gnu/binutils/binutils-$PKGVER.tar.xz"
+SOURCE=${URL##*/}
+SHA256SUM=0f8a4c272d7f17f369ded10a4aca28b8e304828e95526da482b0ccc4dfc9d8e1
+DEPENDS=(linux-headers)
+
+EXTRACT() {
+    local src=$1
+    if [ ! -f configure ]; then
+        tar --strip-components 1 -xf $src
+    fi
+}
+
+PREPARE() {
+    rm -rf build && mkdir -p build
+    pushd build
+    if [ $STAGE == 1 ]; then
+        ../configure --target=$ARCH --prefix=$PREFIX --with-sysroot=$PREFIX \
+                     --disable-multilib --disable-nls
+    fi
+    popd
+}
+
+BUILD() {
+    pushd build
+    make -j$J
+    popd
+}
+
+INSTALL() {
+    pushd build
+    if [ $STAGE == 1 ]; then
+        make install-strip -j$J
+    fi
+    popd
+}

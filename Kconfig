@@ -1,0 +1,18 @@
+choice
+	prompt "ARCH"
+	help
+		Select the Arch to build
+
+	config ARCH_RISCV32
+		bool "RISCV32"
+	config ARCH_RISCV64
+		bool "RISCV64"
+	config ARCH_AARCH64
+		bool "AARCH64"
+	config ARCH_ARM32
+		bool "ARM32"
+	config ARCH_X86
+		bool "X86"
+	config ARCH_X86_64
+		bool "X86_64"
+endchoice

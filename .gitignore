@@ -1,0 +1,8 @@
+.config
+.config.old
+config.sh
+build
+src
+tools
+sysroot
+stage*

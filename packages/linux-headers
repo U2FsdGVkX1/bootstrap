@@ -1,0 +1,42 @@
+PKGNAME=linux-headers
+PKGVER=6.3.4
+URL="https://cdn.kernel.org/pub/linux/kernel/v${PKGVER%%.*}.x/linux-$PKGVER.tar.xz"
+SOURCE=${URL##*/}
+SHA256SUM=d8627528ed6b3ae607d00b1ef5a46e0e7051ae40b285fd4e82f4ff0bb72b68e8
+DEPENDS=()
+
+EXTRACT() {
+    local src=$1
+    if [ ! -f Makefile ]; then
+        tar --strip-components 1 -xf $src
+    fi
+}
+
+PREPARE() {
+    make mrproper
+}
+
+INSTALL() {
+    local arch=""
+    case $ARCH in
+        riscv*)
+            arch="riscv"
+            ;;
+        x86_64*)
+            arch="x86_64"
+            ;;
+        x86*)
+            arch="x86"
+            ;;
+        aarch64*)
+            arch="aarch64"
+            ;;
+        armv7hl*)
+            arch="arm"
+            ;;
+        *)
+            arch=""
+            ;;
+    esac
+    make ARCH=$arch INSTALL_HDR_PATH=$PREFIX/usr headers_install
+}
