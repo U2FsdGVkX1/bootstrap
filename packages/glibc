@@ -3,7 +3,10 @@ PKGVER=2.37
 URL="https://ftpmirror.gnu.org/gnu/glibc/glibc-$PKGVER.tar.xz"
 SOURCE=${URL##*/}
 SHA256SUM=2257eff111a1815d74f46856daaf40b019c1e553156c69d48ba0cbfc1bb91a43
-DEPENDS=(gcc linux-headers)
+DEPENDS=(linux-headers)
+if [ $STAGE == 1 ]; then
+    DEPENDS+=(gcc-lite)
+fi
 
 EXTRACT() {
     local src=$1
@@ -15,10 +18,10 @@ EXTRACT() {
 PREPARE() {
     rm -rf build && mkdir -p build
     pushd build
-    if [ $STAGE == 1 ]; then
-        ../configure --host=$ARCH --prefix=/usr --with-headers=$PREFIX/usr/include \
-                     libc_cv_slibdir=/usr/lib
-    fi
+    export CC=$ARCH-gcc
+    export CXX=$ARCH-gcc
+    ../configure --host=$ARCH --prefix=/usr --with-headers=$PREFIX/usr/include \
+                 libc_cv_slibdir=/usr/lib
     popd
 }
 
@@ -30,8 +33,6 @@ BUILD() {
 
 INSTALL() {
     pushd build
-    if [ $STAGE == 1 ]; then
-        make DESTDIR=$PREFIX install -j$J
-    fi
+    make DESTDIR=$PREFIX install -j$J
     popd
 }

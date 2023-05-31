@@ -19,7 +19,8 @@ PREPARE() {
         ../configure --target=$ARCH --prefix=$PREFIX --with-sysroot=$PREFIX \
                      --disable-multilib --disable-nls
     else
-        ../configure --host=$ARCH --prefix=/usr --disable-multilib --disable-nls
+        ../configure --host=$ARCH --prefix=/usr --with-build-sysroot=$PREFIX \
+                     --disable-multilib --disable-nls
     fi
     popd
 }

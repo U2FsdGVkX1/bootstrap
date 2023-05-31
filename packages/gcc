@@ -3,7 +3,7 @@ PKGVER=13.1.0
 URL="https://ftpmirror.gnu.org/gnu/gcc/gcc-$PKGVER/gcc-$PKGVER.tar.xz"
 SOURCE=${URL##*/}
 SHA256SUM=61d684f0aa5e76ac6585ad8898a2427aade8979ed5e7f85492286c4dfc13ee86
-DEPENDS=(binutils)
+DEPENDS=(binutils glibc)
 
 EXTRACT() {
     local src=$1
@@ -18,16 +18,10 @@ PREPARE() {
     pushd build
     if [ $STAGE == 1 ]; then
         ../configure --target=$ARCH --prefix=$PREFIX --with-sysroot=$PREFIX \
-                     --disable-multilib --disable-nls --disable-shared --disable-threads \
-                     --disable-libgomp --disable-libquadmath --disable-libatomic \
-                     --disable-libssp --disable-libvtv --disable-libstdcxx \
-                     --disable-bootstrap --enable-languages=c,c++ --without-headers --with-newlib
+                     --disable-multilib --disable-nls --disable-bootstrap --enable-languages=c,c++
     else
         ../configure --host=$ARCH --prefix=/usr --with-build-sysroot=$PREFIX \
-                     --disable-multilib --disable-nls \
-                     --disable-libgomp --disable-libquadmath --disable-libatomic \
-                     --disable-libssp --disable-libvtv \
-                     --disable-bootstrap --enable-languages=c,c++
+                     --disable-multilib --disable-nls --disable-bootstrap --enable-languages=c,c++
     fi
     popd
 }

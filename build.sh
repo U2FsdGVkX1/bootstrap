@@ -1,4 +1,4 @@
-#!/bin/bash -ex
+#!/bin/bash -e
 
 # define variables
 ROOT=$PWD
@@ -58,7 +58,8 @@ case "$1" in
 
         # to build
         for build in ${builds[@]}; do
-            $(realpath $0) $build $STAGE
+            echo $build
+            # $(realpath $0) $build $STAGE
         done
         ;;
     * )

@@ -13,10 +13,11 @@ clean:
 
 stage1:
 	@mkdir -p $(ROOT)/stage1
-	@ln -sf ../packages/{linux-headers,binutils,gcc,glibc,gcc-libstdcxx} $(ROOT)/stage1/
+	@ln -sf ../packages/{linux-headers,binutils,gcc-lite,glibc,gcc} $(ROOT)/stage1/
 
 stage2:
 	@mkdir -p $(ROOT)/stage2
+	@ln -sf ../packages/{linux-headers,binutils,glibc,gcc,busybox,make} $(ROOT)/stage2/
 
 stage3:
 	@mkdir -p $(ROOT)/stage3
