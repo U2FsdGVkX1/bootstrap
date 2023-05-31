@@ -3,7 +3,7 @@ call() {
     local func=$1
     shift
     local args=$@
-    if type $func >/dev/null 2>&1; then
+    if declare -F $func >/dev/null 2>&1; then
         $func $args
     fi
 }
