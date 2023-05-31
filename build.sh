@@ -58,8 +58,8 @@ case "$1" in
 
         # to build
         for build in ${builds[@]}; do
-            echo $build
-            # $(realpath $0) $build $STAGE
+            # echo $build
+            $(realpath $0) $build $STAGE
         done
         ;;
     * )
