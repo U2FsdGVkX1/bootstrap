@@ -17,26 +17,5 @@ PREPARE() {
 }
 
 INSTALL() {
-    local arch=""
-    case $ARCH in
-        riscv*)
-            arch="riscv"
-            ;;
-        x86_64*)
-            arch="x86_64"
-            ;;
-        x86*)
-            arch="x86"
-            ;;
-        aarch64*)
-            arch="aarch64"
-            ;;
-        armv7hl*)
-            arch="arm"
-            ;;
-        *)
-            arch=""
-            ;;
-    esac
-    make ARCH=$arch INSTALL_HDR_PATH=$PREFIX/usr headers_install
+    make ARCH=$linuxarch INSTALL_HDR_PATH=$PREFIX/usr headers_install
 }

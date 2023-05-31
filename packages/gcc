@@ -22,6 +22,12 @@ PREPARE() {
                      --disable-libgomp --disable-libquadmath --disable-libatomic \
                      --disable-libssp --disable-libvtv --disable-libstdcxx \
                      --disable-bootstrap --enable-languages=c,c++ --without-headers --with-newlib
+    else
+        ../configure --host=$ARCH --prefix=/usr --with-build-sysroot=$PREFIX \
+                     --disable-multilib --disable-nls \
+                     --disable-libgomp --disable-libquadmath --disable-libatomic \
+                     --disable-libssp --disable-libvtv \
+                     --disable-bootstrap --enable-languages=c,c++
     fi
     popd
 }
@@ -36,6 +42,13 @@ INSTALL() {
     pushd build
     if [ $STAGE == 1 ]; then
         make install-strip -j$J
+    else
+        make DESTDIR=$PREFIX install-strip -j$J
     fi
     popd
+}
+
+POST() {
+    local file="$(dirname $($ARCH-gcc -print-libgcc-file-name))/include/limits.h"
+    cat gcc/limitx.h gcc/glimits.h gcc/limity.h > $file
 }

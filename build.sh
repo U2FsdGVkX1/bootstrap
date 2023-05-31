@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash -ex
 
 # define variables
 ROOT=$PWD
@@ -13,6 +13,27 @@ J=$(grep -c '^processor' /proc/cpuinfo)
 # config and helper functions
 source config.sh
 source scripts/utils.sh
+linuxarch=""
+case $ARCH in
+    riscv*)
+        linuxarch="riscv"
+        ;;
+    x86_64*)
+        linuxarch="x86_64"
+        ;;
+    x86*)
+        linuxarch="x86"
+        ;;
+    aarch64*)
+        linuxarch="aarch64"
+        ;;
+    armv7hl*)
+        linuxarch="arm"
+        ;;
+    *)
+        linuxarch=""
+        ;;
+esac
 
 # get dependencies recursively
 get_dependencies() {
@@ -41,7 +62,7 @@ case "$1" in
         done
         ;;
     * )
-        PATH=$PREFIX/bin:$PATH
+        PATH=$ROOT/tools/bin:$PATH
         source $1
         echo "===== build $PKGNAME.$STAGE start ====="
         source scripts/pkg.sh

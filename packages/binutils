@@ -3,7 +3,7 @@ PKGVER=2.40
 URL="https://ftp.gnu.org/gnu/binutils/binutils-$PKGVER.tar.xz"
 SOURCE=${URL##*/}
 SHA256SUM=0f8a4c272d7f17f369ded10a4aca28b8e304828e95526da482b0ccc4dfc9d8e1
-DEPENDS=(linux-headers)
+DEPENDS=()
 
 EXTRACT() {
     local src=$1
@@ -18,6 +18,8 @@ PREPARE() {
     if [ $STAGE == 1 ]; then
         ../configure --target=$ARCH --prefix=$PREFIX --with-sysroot=$PREFIX \
                      --disable-multilib --disable-nls
+    else
+        ../configure --host=$ARCH --prefix=/usr --disable-multilib --disable-nls
     fi
     popd
 }
@@ -32,6 +34,8 @@ INSTALL() {
     pushd build
     if [ $STAGE == 1 ]; then
         make install-strip -j$J
+    else
+        make DESTDIR=$PREFIX install-strip -j$J
     fi
     popd
 }

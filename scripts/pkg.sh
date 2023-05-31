@@ -25,4 +25,5 @@ call EXTRACT $src
 call PREPARE
 call BUILD
 call INSTALL
+call POST
 popd

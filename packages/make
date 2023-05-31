@@ -1,0 +1,32 @@
+PKGNAME=make
+PKGVER=4.4.1
+URL="https://ftp.gnu.org/gnu/make/make-$PKGVER.tar.gz"
+SOURCE=${URL##*/}
+SHA256SUM=dd16fb1d67bfab79a72f5e8390735c49e3e8e70b4945a15ab1f81ddb78658fb3
+DEPENDS=(busybox)
+
+EXTRACT() {
+    local src=$1
+    if [ ! -f configure ]; then
+        tar --strip-components 1 -xf $src
+    fi
+}
+
+PREPARE() {
+    rm -rf build && mkdir -p build
+    pushd build
+    ../configure --host=$ARCH --prefix=/usr
+    popd
+}
+
+BUILD() {
+    pushd build
+    make -j$J
+    popd
+}
+
+INSTALL() {
+    pushd build
+    make DESTDIR=$PREFIX install -j$J
+    popd
+}
