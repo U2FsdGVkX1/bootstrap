@@ -20,7 +20,7 @@ PREPARE() {
     pushd build
     export CC=$ARCH-gcc
     export CXX=$ARCH-gcc
-    ../configure --host=$ARCH --prefix=/usr --with-headers=$PREFIX/usr/include libc_cv_slibdir=/usr/lib
+    ../configure --host=$ARCH --prefix=/usr --with-headers=$PREFIX/usr/include
     popd
 }
 

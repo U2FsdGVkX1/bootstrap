@@ -50,11 +50,6 @@ get_dependencies() {
 # main program
 case "$1" in
     "" )
-        # init sysroot directory
-        mkdir -p $PREFIX/usr/{lib,lib64}
-        ln -sf usr/lib $PREFIX/lib
-        ln -sf usr/lib64 $PREFIX/lib64
-
         # collect all packages
         builds=()
         for pkg in $ROOT/stage$STAGE/*; do
