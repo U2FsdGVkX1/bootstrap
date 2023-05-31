@@ -20,7 +20,7 @@ PREPARE() {
         ../configure --target=$ARCH --prefix=$PREFIX --with-sysroot=$PREFIX \
                      --disable-multilib --disable-nls --disable-bootstrap --enable-languages=c,c++
     else
-        ../configure --host=$ARCH --prefix=/usr --with-build-sysroot=$PREFIX \
+        ../configure --host=$ARCH --target=$ARCH --prefix=/usr --with-build-sysroot=$PREFIX \
                      --disable-multilib --disable-nls --disable-bootstrap --enable-languages=c,c++
     fi
     popd
