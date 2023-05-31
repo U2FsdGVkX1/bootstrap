@@ -1,6 +1,6 @@
 PKGNAME=glibc
 PKGVER=2.37
-URL="https://ftp.gnu.org/gnu/glibc/glibc-$PKGVER.tar.xz"
+URL="https://ftpmirror.gnu.org/gnu/glibc/glibc-$PKGVER.tar.xz"
 SOURCE=${URL##*/}
 SHA256SUM=2257eff111a1815d74f46856daaf40b019c1e553156c69d48ba0cbfc1bb91a43
 DEPENDS=(gcc linux-headers)
