@@ -6,6 +6,7 @@ INSTALL() {
     mkdir -p $PREFIX/{etc,root,proc,sys,dev,tmp}
     sudo mknod $PREFIX/dev/null c 1 3
     sudo mknod $PREFIX/dev/zero c 1 5
+    echo "nameserver 1.1.1.1" > $PREFIX/etc/resolv.conf
 
     mkdir -p $PREFIX/usr/{bin,sbin,lib,lib64}
     ln -sf usr/bin $PREFIX/bin

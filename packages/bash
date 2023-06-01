@@ -30,3 +30,7 @@ INSTALL() {
     make DESTDIR=$PREFIX install -j$J
     popd
 }
+
+POST() {
+    ln -sf bash $PREFIX/bin/sh
+}
