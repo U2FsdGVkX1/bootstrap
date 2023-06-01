@@ -6,3 +6,4 @@ src
 tools
 sysroot
 stage*
+test.sh
