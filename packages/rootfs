@@ -4,8 +4,8 @@ DEPENDS=()
 
 INSTALL() {
     mkdir -p $PREFIX/{etc,root,proc,sys,dev,tmp}
-    mknod $PREFIX/dev/null c 1 3
-    mknod $PREFIX/dev/zero c 1 5
+    sudo mknod $PREFIX/dev/null c 1 3
+    sudo mknod $PREFIX/dev/zero c 1 5
 
     mkdir -p $PREFIX/usr/{bin,sbin,lib,lib64}
     ln -sf usr/bin $PREFIX/bin
