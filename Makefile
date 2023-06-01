@@ -20,7 +20,7 @@ stage2: config.sh
 	@ln -sf ../packages/{rootfs,linux-headers,binutils,glibc,gcc,busybox,bash,make} $(ROOT)/stage2/
 	@bash build.sh "" 2
 	@mkdir -p sysroot/bootstrap
-	@cp -r $(ROOT)/{packages,scripts,config.sh,build.sh,Makefile} sysroot/bootstrap
+	@cp -r $(ROOT)/{packages,scripts,.config,config.sh,build.sh,Makefile} sysroot/bootstrap
 
 stage3: config.sh
 	@mkdir -p $(ROOT)/stage3
