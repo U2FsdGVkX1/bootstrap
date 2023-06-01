@@ -3,6 +3,7 @@ PKGVER=1.0
 DEPENDS=()
 
 INSTALL() {
+    mkdir -p $PREFIX/{etc,root,proc,sys,dev,tmp}
     mkdir -p $PREFIX/usr/{bin,sbin,lib,lib64}
     ln -sf usr/bin $PREFIX/bin
     ln -sf usr/sbin $PREFIX/sbin
