@@ -37,3 +37,10 @@ INSTALL() {
     make DESTDIR=$PREFIX install -j$J
     popd
 }
+
+POST() {
+    if [ $STAGE == 2 ]; then
+        echo "/lib" >> $PREFIX/etc/ld.so.conf
+        echo "/lib64" >> $PREFIX/etc/ld.so.conf
+    fi
+}
