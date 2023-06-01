@@ -10,7 +10,11 @@ elif [ $STAGE == 2 ]; then
 elif [ $STAGE == 3 ]; then
     PREFIX=/
 fi
-J=$(grep -c '^processor' /proc/cpuinfo)
+if command -v nproc &>/dev/null; then
+    J=$(nproc)
+else
+    J=$(grep -c '^processor' /proc/cpuinfo)
+fi
 
 # config and helper functions
 source config.sh
