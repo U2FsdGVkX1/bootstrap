@@ -1,6 +1,6 @@
 ROOT=$(realpath $(dir $(lastword $(MAKEFILE_LIST))))
 
-all: config.sh stage1 stage2
+all: stage1 stage2
 
 menuconfig:
 	~/.local/bin/menuconfig $(ROOT)/Kconfig
@@ -10,19 +10,19 @@ clean:
 	@rm -rf .config .config.old config.sh
 	@rm -rf stage1 stage2 stage3
 
-stage1:
+stage1: config.sh
 	@mkdir -p $(ROOT)/stage1
 	@ln -sf ../packages/{linux-headers,binutils,gcc-lite,glibc,gcc} $(ROOT)/stage1/
 	@bash build.sh "" 1
 
-stage2:
+stage2: config.sh
 	@mkdir -p $(ROOT)/stage2
 	@ln -sf ../packages/{rootfs,linux-headers,binutils,glibc,gcc,busybox,bash,make} $(ROOT)/stage2/
 	@bash build.sh "" 2
 	@mkdir -p sysroot/bootstrap
 	@cp -r $(ROOT)/{packages,scripts,config.sh,build.sh,Makefile} sysroot/bootstrap
 
-stage3:
+stage3: config.sh
 	@mkdir -p $(ROOT)/stage3
 	@ln -sf ../packages/{locale,zlib,perl,openssl,wget,pkg-config,libgpg-error,libgcrypt,file,popt,libarchive,sqlite,lua} $(ROOT)/stage3/
 	@bash build.sh "" 3
