@@ -1,0 +1,11 @@
+PKGNAME=rootfs
+PKGVER=1.0
+DEPENDS=()
+
+INSTALL() {
+    mkdir -p $PREFIX/usr/{bin,sbin,lib,lib64}
+    ln -sf usr/bin $PREFIX/bin
+    ln -sf usr/sbin $PREFIX/sbin
+    ln -sf usr/lib $PREFIX/lib
+    ln -sf usr/lib64 $PREFIX/lib64
+}

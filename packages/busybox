@@ -3,7 +3,7 @@ PKGVER=1.36.1
 URL="https://busybox.net/downloads/busybox-$PKGVER.tar.bz2"
 SOURCE=${URL##*/}
 SHA256SUM=b8cc24c9574d809e7279c3be349795c5d5ceb6fdf19ca709f80cde50e47de314
-DEPENDS=()
+DEPENDS=(rootfs)
 
 EXTRACT() {
     local src=$1

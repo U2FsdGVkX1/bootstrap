@@ -6,6 +6,8 @@ SHA256SUM=2257eff111a1815d74f46856daaf40b019c1e553156c69d48ba0cbfc1bb91a43
 DEPENDS=(linux-headers)
 if [ $STAGE == 1 ]; then
     DEPENDS+=(gcc-lite)
+elif [ $STAGE == 2 ]; then
+    DEPENDS+=(rootfs)
 fi
 
 EXTRACT() {
