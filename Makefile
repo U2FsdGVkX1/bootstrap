@@ -1,6 +1,6 @@
 ROOT=$(realpath $(dir $(lastword $(MAKEFILE_LIST))))
 
-all: config.sh stage1 stage2 stage3
+all: config.sh stage1 stage2
 
 menuconfig:
 	~/.local/bin/menuconfig $(ROOT)/Kconfig
@@ -17,7 +17,7 @@ stage1:
 
 stage2:
 	@mkdir -p $(ROOT)/stage2
-	@ln -sf ../packages/{rootfs,linux-headers,binutils,glibc,gcc,busybox,bash,make} $(ROOT)/stage2/
+	@ln -sf ../packages/{rootfs,linux-headers,binutils,glibc,gcc,busybox,bash,make,zlib,wget} $(ROOT)/stage2/
 	@bash build.sh "" 2
 
 stage3:

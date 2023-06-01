@@ -1,0 +1,32 @@
+PKGNAME=zlib
+PKGVER=1.2.13
+URL="https://www.zlib.net/zlib-$PKGVER.tar.xz"
+SOURCE=${URL##*/}
+SHA256SUM=d14c38e313afc35a9a8760dadf26042f51ea0f5d154b0630a31da0540107fb98
+DEPENDS=(busybox)
+
+EXTRACT() {
+    local src=$1
+    if [ ! -f configure ]; then
+        tar --strip-components 1 -xf $src
+    fi
+}
+
+PREPARE() {
+    rm -rf build && mkdir -p build
+    pushd build
+    CHOST=$ARCH ../configure --prefix=/usr
+    popd
+}
+
+BUILD() {
+    pushd build
+    make -j$J
+    popd
+}
+
+INSTALL() {
+    pushd build
+    make DESTDIR=$PREFIX install -j$J
+    popd
+}
