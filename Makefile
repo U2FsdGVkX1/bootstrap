@@ -17,11 +17,15 @@ stage1:
 
 stage2:
 	@mkdir -p $(ROOT)/stage2
-	@ln -sf ../packages/{rootfs,linux-headers,binutils,glibc,gcc,busybox,bash,make,zlib,wget} $(ROOT)/stage2/
+	@ln -sf ../packages/{rootfs,linux-headers,binutils,glibc,gcc,busybox,bash,make} $(ROOT)/stage2/
 	@bash build.sh "" 2
+	@mkdir -p sysroot/bootstrap
+	@cp -r ./{packages,scripts,config.sh,build.sh,Makefile} sysroot/bootstrap
 
 stage3:
 	@mkdir -p $(ROOT)/stage3
+	@ln -sf ../packages/{locale,zlib,perl,openssl,wget} $(ROOT)/stage3/
+	@bash build.sh "" 3
 
 config.sh: .config
 	@rm -rf $@

@@ -45,4 +45,6 @@ INSTALL() {
 POST() {
     local file="$(dirname $($ARCH-gcc -print-libgcc-file-name))/include/limits.h"
     cat gcc/limitx.h gcc/glimits.h gcc/limity.h > $file
+    
+    ln -sf $ARCH-gcc $PREFIX/bin/cc
 }

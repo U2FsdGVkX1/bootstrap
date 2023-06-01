@@ -5,8 +5,10 @@ ROOT=$PWD
 STAGE=${2:-1}
 if [ $STAGE == 1 ]; then
     PREFIX=$ROOT/tools
-else [ $STAGE == 2 ];
+elif [ $STAGE == 2 ]; then
     PREFIX=$ROOT/sysroot
+elif [ $STAGE == 3 ]; then
+    PREFIX=/
 fi
 J=$(grep -c '^processor' /proc/cpuinfo)
 
@@ -58,8 +60,8 @@ case "$1" in
 
         # to build
         for build in ${builds[@]}; do
-            # echo $build
-            $(realpath $0) $build $STAGE
+            echo $build
+            # $(realpath $0) $build $STAGE
         done
         ;;
     * )

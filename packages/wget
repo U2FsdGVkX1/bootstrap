@@ -1,9 +1,9 @@
 PKGNAME=wget
 PKGVER=1.21.4
-URL="https://ftpmirror.gnu.org/gnu/wget/wget-$PKGVER.tar.gz"
+URL="http://ftpmirror.gnu.org/gnu/wget/wget-$PKGVER.tar.gz"
 SOURCE=${URL##*/}
 SHA256SUM=81542f5cefb8faacc39bbbc6c82ded80e3e4a88505ae72ea51df27525bcde04c
-DEPENDS=(busybox)
+DEPENDS=(zlib openssl)
 
 EXTRACT() {
     local src=$1
@@ -15,7 +15,8 @@ EXTRACT() {
 PREPARE() {
     rm -rf build && mkdir -p build
     pushd build
-    ../configure --host=$ARCH --prefix=/usr --with-ssl=openssl
+    ../configure --prefix=/usr --with-ssl=openssl \
+                 OPENSSL_CFLAGS="-I/usr/include" OPENSSL_LIBS="-lssl -lcrypto"
     popd
 }
 
@@ -27,6 +28,10 @@ BUILD() {
 
 INSTALL() {
     pushd build
-    make DESTDIR=$PREFIX install -j$J
+    make install -j$J
     popd
+}
+
+POST() {
+    wget --no-check-certificate https://curl.haxx.se/ca/cacert.pem -O /etc/ssl/cert.pem
 }

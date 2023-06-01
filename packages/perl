@@ -1,13 +1,13 @@
-PKGNAME=zlib
-PKGVER=1.2.13
-URL="http://www.zlib.net/zlib-$PKGVER.tar.xz"
+PKGNAME=perl
+PKGVER=5.36.1
+URL="http://www.cpan.org/src/5.0/perl-$PKGVER.tar.gz"
 SOURCE=${URL##*/}
-SHA256SUM=d14c38e313afc35a9a8760dadf26042f51ea0f5d154b0630a31da0540107fb98
-DEPENDS=()
+SHA256SUM=68203665d8ece02988fc77dc92fccbb297a83a4bb4b8d07558442f978da54cc1
+DEPENDS=(locale zlib)
 
 EXTRACT() {
     local src=$1
-    if [ ! -f configure ]; then
+    if [ ! -f Configure ]; then
         tar --strip-components 1 -xf $src
     fi
 }
@@ -15,7 +15,7 @@ EXTRACT() {
 PREPARE() {
     rm -rf build && mkdir -p build
     pushd build
-    CHOST=$ARCH ../configure --prefix=/usr
+    ../Configure -des -Dprefix=/usr
     popd
 }
 
