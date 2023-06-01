@@ -3,7 +3,7 @@ PKGVER=5.36.1
 URL="http://www.cpan.org/src/5.0/perl-$PKGVER.tar.gz"
 SOURCE=${URL##*/}
 SHA256SUM=68203665d8ece02988fc77dc92fccbb297a83a4bb4b8d07558442f978da54cc1
-DEPENDS=(locale zlib)
+DEPENDS=(zlib)
 
 EXTRACT() {
     local src=$1

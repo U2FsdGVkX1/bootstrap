@@ -20,9 +20,13 @@ EXTRACT() {
 PREPARE() {
     rm -rf build && mkdir -p build
     pushd build
-    export CC=$ARCH-gcc
-    export CXX=$ARCH-gcc
-    ../configure --host=$ARCH --prefix=/usr --with-headers=$PREFIX/usr/include
+    if [ $STAGE == 1 ]; then
+        export CXX=$ARCH-gcc
+        ../configure --host=$ARCH --prefix=/usr --with-headers=$PREFIX/usr/include \
+                     libc_cv_slibdir=/usr/lib
+    elif [ $STAGE == 2 ]; then
+        ../configure --host=$ARCH --prefix=/usr --with-headers=$PREFIX/usr/include
+    fi
     popd
 }
 
@@ -35,6 +39,9 @@ BUILD() {
 INSTALL() {
     pushd build
     make DESTDIR=$PREFIX install -j$J
+    if [ $STAGE == 2 ]; then
+        make DESTDIR=$PREFIX SUPPORTED-LOCALES=en_US.UTF-8/UTF-8 localedata/install-locales
+    fi
     popd
 }
 
