@@ -13,20 +13,14 @@ EXTRACT() {
 }
 
 PREPARE() {
-    rm -rf build && mkdir -p build
-    pushd build
-    ../Configure -des -Dprefix=/usr
-    popd
+    make clean || true
+    ./Configure -des -Dprefix=/usr
 }
 
 BUILD() {
-    pushd build
     make -j$J
-    popd
 }
 
 INSTALL() {
-    pushd build
     make install -j$J
-    popd
 }
