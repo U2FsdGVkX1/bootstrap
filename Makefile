@@ -24,7 +24,7 @@ stage2:
 
 stage3:
 	@mkdir -p $(ROOT)/stage3
-	@ln -sf ../packages/{locale,zlib,perl,openssl,wget} $(ROOT)/stage3/
+	@ln -sf ../packages/{locale,zlib,perl,openssl,wget,pkg-config,libgpg-error,libgcrypt,file,popt,libarchive,sqlite,lua} $(ROOT)/stage3/
 	@bash build.sh "" 3
 
 config.sh: .config

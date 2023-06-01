@@ -1,0 +1,32 @@
+PKGNAME=libarchive
+PKGVER=3.6.2
+URL="https://www.libarchive.org/downloads/libarchive-$PKGVER.tar.xz"
+SOURCE=${URL##*/}
+SHA256SUM=9e2c1b80d5fbe59b61308fdfab6c79b5021d7ff4ff2489fb12daf0a96a83551d
+DEPENDS=(pkg-config)
+
+EXTRACT() {
+    local src=$1
+    if [ ! -f configure ]; then
+        tar --strip-components 1 -xf $src
+    fi
+}
+
+PREPARE() {
+    rm -rf build1 && mkdir -p build1
+    pushd build1
+    ../configure --prefix=/usr
+    popd
+}
+
+BUILD() {
+    pushd build1
+    make -j$J
+    popd
+}
+
+INSTALL() {
+    pushd build1
+    make install -j$J
+    popd
+}

@@ -1,9 +1,9 @@
-PKGNAME=pkg-config
-PKGVER=0.29.2
-URL="https://pkgconfig.freedesktop.org/releases/pkg-config-$PKGVER.tar.gz"
+PKGNAME=popt
+PKGVER=1.19
+URL="http://ftp.rpm.org/popt/releases/popt-1.x/popt-$PKGVER.tar.gz"
 SOURCE=${URL##*/}
-SHA256SUM=6fc69c01688c9458a57eb9a1664c9aba372ccda420a02bf4429fe610e7e7d591
-DEPENDS=(wget)
+SHA256SUM=c25a4838fc8e4c1c8aacb8bd620edb3084a3d63bf8987fdad3ca2758c63240f9
+DEPENDS=(pkg-config)
 
 EXTRACT() {
     local src=$1
@@ -15,7 +15,7 @@ EXTRACT() {
 PREPARE() {
     rm -rf build && mkdir -p build
     pushd build
-    ../configure --prefix=/usr --with-internal-glib
+    ../configure --prefix=/usr
     popd
 }
 

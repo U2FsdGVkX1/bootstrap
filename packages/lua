@@ -1,0 +1,22 @@
+PKGNAME=lua
+PKGVER=5.4.6
+URL="https://www.lua.org/ftp/lua-$PKGVER.tar.gz"
+SOURCE=${URL##*/}
+SHA256SUM=7d5ea1b9cb6aa0b59ca3dde1c6adcb57ef83a1ba8e5432c0ecd06bf439b3ad88
+DEPENDS=(pkg-config)
+
+EXTRACT() {
+    local src=$1
+    if [ ! -f configure ]; then
+        tar --strip-components 1 -xf $src
+        sed -i '/#define LUA_ROOT/s:/usr/local/:/usr/:' src/luaconf.h
+    fi
+}
+
+BUILD() {
+    make -j$J
+}
+
+INSTALL() {
+    make INSTALL_TOP=/usr install -j$J
+}

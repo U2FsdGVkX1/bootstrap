@@ -1,9 +1,9 @@
-PKGNAME=pkg-config
-PKGVER=0.29.2
-URL="https://pkgconfig.freedesktop.org/releases/pkg-config-$PKGVER.tar.gz"
+PKGNAME=libgcrypt
+PKGVER=1.10.2
+URL="https://gnupg.org/ftp/gcrypt/libgcrypt/libgcrypt-$PKGVER.tar.bz2"
 SOURCE=${URL##*/}
-SHA256SUM=6fc69c01688c9458a57eb9a1664c9aba372ccda420a02bf4429fe610e7e7d591
-DEPENDS=(wget)
+SHA256SUM=3b9c02a004b68c256add99701de00b383accccf37177e0d6c58289664cce0c03
+DEPENDS=(pkg-config libgpg-error)
 
 EXTRACT() {
     local src=$1
@@ -15,7 +15,7 @@ EXTRACT() {
 PREPARE() {
     rm -rf build && mkdir -p build
     pushd build
-    ../configure --prefix=/usr --with-internal-glib
+    ../configure --prefix=/usr
     popd
 }
 

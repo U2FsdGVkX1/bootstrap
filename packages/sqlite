@@ -1,9 +1,9 @@
-PKGNAME=pkg-config
-PKGVER=0.29.2
-URL="https://pkgconfig.freedesktop.org/releases/pkg-config-$PKGVER.tar.gz"
+PKGNAME=sqlite
+PKGVER=3420000
+URL="https://www.sqlite.org/2023/sqlite-autoconf-$PKGVER.tar.gz"
 SOURCE=${URL##*/}
-SHA256SUM=6fc69c01688c9458a57eb9a1664c9aba372ccda420a02bf4429fe610e7e7d591
-DEPENDS=(wget)
+SHA256SUM=7abcfd161c6e2742ca5c6c0895d1f853c940f203304a0b49da4e1eca5d088ca6
+DEPENDS=(pkg-config)
 
 EXTRACT() {
     local src=$1
@@ -15,7 +15,7 @@ EXTRACT() {
 PREPARE() {
     rm -rf build && mkdir -p build
     pushd build
-    ../configure --prefix=/usr --with-internal-glib
+    ../configure --prefix=/usr
     popd
 }
 
