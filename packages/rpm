@@ -30,3 +30,7 @@ INSTALL() {
     make install -j$J
     popd
 }
+
+POST() {
+    ldconfig
+}
