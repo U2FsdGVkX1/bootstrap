@@ -15,7 +15,7 @@ EXTRACT() {
 PREPARE() {
     rm -rf build && mkdir -p build
     pushd build
-    ../configure --build=$ARCH--prefix=/usr
+    ../configure --build=$ARCH --prefix=/usr
     popd
 }
 
