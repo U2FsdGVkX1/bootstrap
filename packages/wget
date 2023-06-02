@@ -15,8 +15,7 @@ EXTRACT() {
 PREPARE() {
     rm -rf build && mkdir -p build
     pushd build
-    ../configure --prefix=/usr --with-ssl=openssl \
-                 OPENSSL_CFLAGS="-I/usr/include" OPENSSL_LIBS="-lssl -lcrypto"
+    ../configure --prefix=/usr --with-ssl=openssl
     popd
 }
 
@@ -33,6 +32,5 @@ INSTALL() {
 }
 
 POST() {
-    ldconfig
     wget --no-check-certificate https://curl.haxx.se/ca/cacert.pem -O /etc/ssl/cert.pem
 }
