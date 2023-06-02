@@ -15,7 +15,7 @@ EXTRACT() {
 PREPARE() {
     rm -rf build && mkdir -p build
     pushd build
-    ../configure --prefix=/usr --with-openssl
+    ../configure --prefix=/usr --with-openssl --with-ca-bundle=$PREFIX/etc/ssl/cert.pem
     popd
 }
 
