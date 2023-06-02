@@ -9,6 +9,7 @@ elif [ $STAGE == 2 ]; then
     PREFIX=$ROOT/sysroot
 elif [ $STAGE == 3 ]; then
     PREFIX=/
+    ldconfig
 fi
 if command -v nproc &>/dev/null; then
     J=$(nproc)
