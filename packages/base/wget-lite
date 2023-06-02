@@ -1,0 +1,32 @@
+PKGNAME=wget-lite
+PKGVER=1.21.4
+URL="https://ftpmirror.gnu.org/gnu/wget/wget-$PKGVER.tar.gz"
+SOURCE=${URL##*/}
+SHA256SUM=81542f5cefb8faacc39bbbc6c82ded80e3e4a88505ae72ea51df27525bcde04c
+DEPENDS=(rootfs)
+
+EXTRACT() {
+    local src=$1
+    if [ ! -f configure ]; then
+        tar --strip-components 1 -xf $src
+    fi
+}
+
+PREPARE() {
+    rm -rf build && mkdir -p build
+    pushd build
+    ../configure --host=$ARCH --prefix=/usr --with-ssl=no --without-zlib --disable-pcre2
+    popd
+}
+
+BUILD() {
+    pushd build
+    make -j$J
+    popd
+}
+
+INSTALL() {
+    pushd build
+    make DESTDIR=$PREFIX install -j$J
+    popd
+}

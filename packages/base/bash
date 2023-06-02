@@ -1,0 +1,36 @@
+PKGNAME=bash
+PKGVER=5.2.15
+URL="https://ftpmirror.gnu.org/gnu/bash/bash-$PKGVER.tar.gz"
+SOURCE=${URL##*/}
+SHA256SUM=13720965b5f4fc3a0d4b61dd37e7565c741da9a5be24edc2ae00182fc1b3588c
+DEPENDS=(rootfs)
+
+EXTRACT() {
+    local src=$1
+    if [ ! -f configure ]; then
+        tar --strip-components 1 -xf $src
+    fi
+}
+
+PREPARE() {
+    rm -rf build && mkdir -p build
+    pushd build
+    ../configure --host=$ARCH --prefix=/usr
+    popd
+}
+
+BUILD() {
+    pushd build
+    make -j$J
+    popd
+}
+
+INSTALL() {
+    pushd build
+    make DESTDIR=$PREFIX install -j$J
+    popd
+}
+
+POST() {
+    ln -sf bash $PREFIX/bin/sh
+}

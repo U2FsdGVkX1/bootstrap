@@ -12,19 +12,20 @@ clean:
 
 stage1: config.sh
 	@mkdir -p $(ROOT)/stage1
-	@ln -sf ../packages/{linux-headers,binutils,gcc-lite,glibc,gcc} $(ROOT)/stage1/
+	@ln -sf ../packages/toolchains/{linux-headers,binutils,gcc-lite,glibc,gcc} $(ROOT)/stage1/
 	@bash build.sh "" 1
 
 stage2: config.sh
 	@mkdir -p $(ROOT)/stage2
-	@ln -sf ../packages/{rootfs,linux-headers,binutils,glibc,gcc,busybox,bash,make} $(ROOT)/stage2/
+	@ln -sf ../packages/base/{rootfs,m4,ncurses,coreutils,diffutils,findutils,gawk,grep,gzip,xz,bzip2,tar,patch,sed,file,bash,make,wget-lite} $(ROOT)/stage2/
+	@ln -sf ../packages/toolchains/{linux-headers,binutils,glibc,gcc} $(ROOT)/stage2/
 	@bash build.sh "" 2
 	@mkdir -p sysroot/bootstrap
 	@cp -r $(ROOT)/{packages,scripts,.config,build.sh,Makefile} sysroot/bootstrap
 
 stage3: config.sh
 	@mkdir -p $(ROOT)/stage3
-	@ln -sf ../packages/{zlib,perl,openssl,wget,pkg-config,libgpg-error,libgcrypt,file,popt,libarchive,sqlite,lua,python,rpm} $(ROOT)/stage3/
+	@ln -sf ../packages/rpms/{zlib,perl,openssl,wget,pkg-config,libgpg-error,libgcrypt,popt,libarchive,sqlite,lua,python,rpm} $(ROOT)/stage3/
 	@bash build.sh "" 3
 
 config.sh: .config

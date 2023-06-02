@@ -1,9 +1,9 @@
-PKGNAME=bash
-PKGVER=5.2.15
-URL="https://ftpmirror.gnu.org/gnu/bash/bash-$PKGVER.tar.gz"
+PKGNAME=xz
+PKGVER=5.4.3
+URL="https://tukaani.org/xz/xz-$PKGVER.tar.xz"
 SOURCE=${URL##*/}
-SHA256SUM=13720965b5f4fc3a0d4b61dd37e7565c741da9a5be24edc2ae00182fc1b3588c
-DEPENDS=(busybox)
+SHA256SUM=92177bef62c3824b4badc524f8abcce54a20b7dbcfb84cde0a2eb8b49159518c
+DEPENDS=(rootfs)
 
 EXTRACT() {
     local src=$1
@@ -29,8 +29,4 @@ INSTALL() {
     pushd build
     make DESTDIR=$PREFIX install -j$J
     popd
-}
-
-POST() {
-    ln -sf bash $PREFIX/bin/sh
 }

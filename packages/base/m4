@@ -1,0 +1,32 @@
+PKGNAME=m4
+PKGVER=1.4.19
+URL="https://ftpmirror.gnu.org/gnu/m4/m4-$PKGVER.tar.xz"
+SOURCE=${URL##*/}
+SHA256SUM=63aede5c6d33b6d9b13511cd0be2cac046f2e70fd0a07aa9573a04a82783af96
+DEPENDS=(rootfs)
+
+EXTRACT() {
+    local src=$1
+    if [ ! -f configure ]; then
+        tar --strip-components 1 -xf $src
+    fi
+}
+
+PREPARE() {
+    rm -rf build && mkdir -p build
+    pushd build
+    ../configure --host=$ARCH --prefix=/usr
+    popd
+}
+
+BUILD() {
+    pushd build
+    make -j$J
+    popd
+}
+
+INSTALL() {
+    pushd build
+    make DESTDIR=$PREFIX install -j$J
+    popd
+}

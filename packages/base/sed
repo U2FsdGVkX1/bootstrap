@@ -1,9 +1,9 @@
-PKGNAME=make
-PKGVER=4.4.1
-URL="https://ftpmirror.gnu.org/gnu/make/make-$PKGVER.tar.gz"
+PKGNAME=sed
+PKGVER=4.9
+URL="https://ftpmirror.gnu.org/gnu/sed/sed-$PKGVER.tar.xz"
 SOURCE=${URL##*/}
-SHA256SUM=dd16fb1d67bfab79a72f5e8390735c49e3e8e70b4945a15ab1f81ddb78658fb3
-DEPENDS=(busybox)
+SHA256SUM=6e226b732e1cd739464ad6862bd1a1aba42d7982922da7a53519631d24975181
+DEPENDS=(rootfs)
 
 EXTRACT() {
     local src=$1

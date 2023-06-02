@@ -1,0 +1,32 @@
+PKGNAME=coreutils
+PKGVER=9.3
+URL="https://ftpmirror.gnu.org/gnu/coreutils/coreutils-$PKGVER.tar.xz"
+SOURCE=${URL##*/}
+SHA256SUM=adbcfcfe899235b71e8768dcf07cd532520b7f54f9a8064843f8d199a904bbaa
+DEPENDS=(rootfs)
+
+EXTRACT() {
+    local src=$1
+    if [ ! -f configure ]; then
+        tar --strip-components 1 -xf $src
+    fi
+}
+
+PREPARE() {
+    rm -rf build && mkdir -p build
+    pushd build
+    ../configure --host=$ARCH --prefix=/usr --enable-install-program=hostname
+    popd
+}
+
+BUILD() {
+    pushd build
+    make -j$J
+    popd
+}
+
+INSTALL() {
+    pushd build
+    make DESTDIR=$PREFIX install -j$J
+    popd
+}

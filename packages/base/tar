@@ -1,0 +1,32 @@
+PKGNAME=tar
+PKGVER=1.34
+URL="https://ftpmirror.gnu.org/gnu/tar/tar-$PKGVER.tar.xz"
+SOURCE=${URL##*/}
+SHA256SUM=63bebd26879c5e1eea4352f0d03c991f966aeb3ddeb3c7445c902568d5411d28
+DEPENDS=(rootfs)
+
+EXTRACT() {
+    local src=$1
+    if [ ! -f configure ]; then
+        tar --strip-components 1 -xf $src
+    fi
+}
+
+PREPARE() {
+    rm -rf build && mkdir -p build
+    pushd build
+    ../configure --host=$ARCH --prefix=/usr
+    popd
+}
+
+BUILD() {
+    pushd build
+    make -j$J
+    popd
+}
+
+INSTALL() {
+    pushd build
+    make DESTDIR=$PREFIX install -j$J
+    popd
+}

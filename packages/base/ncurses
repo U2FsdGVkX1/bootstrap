@@ -1,9 +1,9 @@
-PKGNAME=file
-PKGVER=5.44
-URL="https://astron.com/pub/file/file-$PKGVER.tar.gz"
+PKGNAME=ncurses
+PKGVER=6.4
+URL="https://ftpmirror.gnu.org/gnu/ncurses/ncurses-$PKGVER.tar.gz"
 SOURCE=${URL##*/}
-SHA256SUM=3751c7fba8dbc831cb8d7cc8aff21035459b8ce5155ef8b0880a27d028475f3b
-DEPENDS=(pkg-config)
+SHA256SUM=6931283d9ac87c5073f30b6290c4c75f21632bb4fc3603ac8100812bed248159
+DEPENDS=(rootfs)
 
 EXTRACT() {
     local src=$1
@@ -15,7 +15,7 @@ EXTRACT() {
 PREPARE() {
     rm -rf build && mkdir -p build
     pushd build
-    ../configure --prefix=/usr
+    ../configure --host=$ARCH --prefix=/usr
     popd
 }
 
@@ -27,6 +27,6 @@ BUILD() {
 
 INSTALL() {
     pushd build
-    make install -j$J
+    make DESTDIR=$PREFIX install -j$J
     popd
 }

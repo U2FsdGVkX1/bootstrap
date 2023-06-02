@@ -1,0 +1,25 @@
+PKGNAME=bzip2
+PKGVER=1.0.8
+URL="https://sourceware.org/pub/bzip2/bzip2-$PKGVER.tar.gz"
+SOURCE=${URL##*/}
+SHA256SUM=ab5a03176ee106d3f0fa90e381da478ddae405918153cca248e682cd0c4a2269
+DEPENDS=(rootfs)
+
+EXTRACT() {
+    local src=$1
+    if [ ! -f Makefile ]; then
+        tar --strip-components 1 -xf $src
+    fi
+}
+
+PREPARE() {
+    make clean
+}
+
+BUILD() {
+    make -j$J
+}
+
+INSTALL() {
+    make PREFIX=$PREFIX install -j$J
+}
