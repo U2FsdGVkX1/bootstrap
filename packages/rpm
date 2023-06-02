@@ -3,7 +3,7 @@ PKGVER=4.18.1
 URL="https://ftp.osuosl.org/pub/rpm/releases/rpm-4.18.x/rpm-$PKGVER.tar.bz2"
 SOURCE=${URL##*/}
 SHA256SUM=37f3b42c0966941e2ad3f10fde3639824a6591d07197ba8fd0869ca0779e1f56
-DEPENDS=(zlib pkg-config libgpg-error libgcrypt file popt libarchive sqlite lua)
+DEPENDS=(zlib pkg-config libgpg-error libgcrypt file popt libarchive sqlite lua python)
 
 EXTRACT() {
     local src=$1
@@ -15,7 +15,7 @@ EXTRACT() {
 PREPARE() {
     rm -rf build1 && mkdir -p build1
     pushd build1
-    ../configure --prefix=/usr
+    ../configure --prefix=/usr --enable-python
     popd
 }
 

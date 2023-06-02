@@ -1,0 +1,32 @@
+PKGNAME=python
+PKGVER=3.11.3
+URL="https://www.python.org/ftp/python/$PKGVER/Python-$PKGVER.tgz"
+SOURCE=${URL##*/}
+SHA256SUM=1a79f3df32265d9e6625f1a0b31c28eb1594df911403d11f3320ee1da1b3e048
+DEPENDS=(pkg-config openssl sqlite)
+
+EXTRACT() {
+    local src=$1
+    if [ ! -f configure ]; then
+        tar --strip-components 1 -xf $src
+    fi
+}
+
+PREPARE() {
+    rm -rf build && mkdir -p build
+    pushd build
+    ../configure --prefix=/usr
+    popd
+}
+
+BUILD() {
+    pushd build
+    make -j$J
+    popd
+}
+
+INSTALL() {
+    pushd build
+    make install -j$J
+    popd
+}
