@@ -17,7 +17,7 @@ PREPARE() {
 }
 
 BUILD() {
-    make -j$J
+    make -f Makefile-libbz2_so -j$J
 }
 
 INSTALL() {
