@@ -18,7 +18,7 @@ PREPARE() {
     pushd build
     ../configure --target=$ARCH --prefix=$PREFIX --with-sysroot=$PREFIX \
                  --disable-multilib --disable-nls --disable-shared --disable-threads \
-                 --disable-bootstrap --enable-languages=c --with-newlib --enable-default-pie
+                 --disable-bootstrap --enable-languages=c --with-newlib
     popd
 }
 
