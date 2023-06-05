@@ -18,10 +18,10 @@ PREPARE() {
     pushd build
     if [ $STAGE == 1 ]; then
         ../configure --target=$ARCH --prefix=$PREFIX --with-sysroot=$PREFIX \
-                     --disable-multilib --disable-nls --disable-bootstrap --enable-languages=c,c++
+                     --disable-multilib --disable-nls --disable-bootstrap --enable-languages=c,c++ --enable-default-pie
     else
         ../configure --host=$ARCH --target=$ARCH --prefix=/usr --with-build-sysroot=$PREFIX \
-                     --disable-multilib --disable-nls --disable-bootstrap --enable-languages=c,c++
+                     --disable-multilib --disable-nls --disable-bootstrap --enable-languages=c,c++ --enable-default-pie
     fi
     popd
 }

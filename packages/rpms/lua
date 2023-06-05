@@ -14,7 +14,7 @@ EXTRACT() {
 }
 
 BUILD() {
-    make MYCFLAGS="-fPIC" linux -j$J
+    make linux -j$J
 }
 
 INSTALL() {
