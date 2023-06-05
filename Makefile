@@ -18,7 +18,7 @@ stage1: config.sh
 stage2: config.sh
 	@mkdir -p $(ROOT)/stage2
 	@ln -sf ../packages/base/{rootfs,m4,gettext,ncurses,coreutils,diffutils,findutils} $(ROOT)/stage2/
-	@ln -sf ../packages/base/{gawk,grep,gzip,xz,bzip2,tar,patch,sed,file,bash,make,wget-lite} $(ROOT)/stage2/
+	@ln -sf ../packages/base/{gawk,grep,gzip,xz,tar,patch,sed,file,bash,make,wget-lite} $(ROOT)/stage2/
 	@ln -sf ../packages/toolchains/{linux-headers,binutils,glibc,gcc} $(ROOT)/stage2/
 	@bash build.sh "" 2
 	@mkdir -p sysroot/bootstrap
@@ -26,7 +26,7 @@ stage2: config.sh
 
 stage3: config.sh
 	@mkdir -p $(ROOT)/stage3
-	@ln -sf ../packages/rpms/{zlib,perl,openssl,wget,curl,pkg-config,libgpg-error,libgcrypt,popt,libarchive,sqlite,lua,python,rpm} $(ROOT)/stage3/
+	@ln -sf ../packages/rpms/{zlib,perl,openssl,wget,curl,pkg-config,bzip2,libgpg-error,libgcrypt,popt,libarchive,sqlite,lua,python,rpm} $(ROOT)/stage3/
 	@bash build.sh "" 3
 
 config.sh: .config

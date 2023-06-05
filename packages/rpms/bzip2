@@ -3,7 +3,7 @@ PKGVER=1.0.8
 URL="https://sourceware.org/pub/bzip2/bzip2-$PKGVER.tar.gz"
 SOURCE=${URL##*/}
 SHA256SUM=ab5a03176ee106d3f0fa90e381da478ddae405918153cca248e682cd0c4a2269
-DEPENDS=(rootfs)
+DEPENDS=(pkg-config)
 
 EXTRACT() {
     local src=$1
@@ -21,5 +21,5 @@ BUILD() {
 }
 
 INSTALL() {
-    make PREFIX=$PREFIX/usr install -j$J
+    make install -j$J
 }

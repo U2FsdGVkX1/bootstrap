@@ -3,7 +3,7 @@ PKGVER=1.47
 URL="https://gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-$PKGVER.tar.bz2"
 SOURCE=${URL##*/}
 SHA256SUM=9e3c670966b96ecc746c28c2c419541e3bcb787d1a73930f5e5f5e1bcbbb9bdb
-DEPENDS=(pkg-config)
+DEPENDS=(pkg-config bzip2)
 
 EXTRACT() {
     local src=$1
