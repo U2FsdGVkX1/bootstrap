@@ -26,7 +26,7 @@ stage2: stage1 config.sh
 
 stage3: config.sh
 	@mkdir -p $(ROOT)/stage3
-	@ln -sf ../packages/rpms/{zlib,perl,openssl,wget,curl,gettext,git} $(ROOT)/stage3/
+	@ln -sf ../packages/rpms/{zlib,perl,openssl,wget,curl,gettext,ncurses,git} $(ROOT)/stage3/
 	@ln -sf ../packages/rpms/{pkg-config,bzip2,libgpg-error,libgcrypt,popt,libarchive,sqlite,lua,python,rpm} $(ROOT)/stage3/
 	@ln -sf ../packages/rpms/{help2man,rpmdevtools} $(ROOT)/stage3/
 	@bash -e build.sh "" 3
