@@ -13,6 +13,7 @@ EXTRACT() {
 }
 
 PREPARE() {
+    pip install progressbar2 requests
     rm -rf build && mkdir -p build
     pushd build
     ../configure --prefix=/usr
