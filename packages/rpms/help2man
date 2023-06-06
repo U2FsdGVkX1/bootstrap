@@ -1,9 +1,9 @@
-PKGNAME=python
-PKGVER=3.11.3
-URL="https://registry.npmmirror.com/-/binary/python/$PKGVER/Python-$PKGVER.tgz"
+PKGNAME=help2man
+PKGVER=1.49.3
+URL="http://ftpmirror.gnu.org/gnu/help2man/help2man-$PKGVER.tar.xz"
 SOURCE=${URL##*/}
-SHA256SUM=1a79f3df32265d9e6625f1a0b31c28eb1594df911403d11f3320ee1da1b3e048
-DEPENDS=(pkg-config openssl sqlite)
+SHA256SUM=4d7e4fdef2eca6afe07a2682151cea78781e0a4e8f9622142d9f70c083a2fd4f
+DEPENDS=(rpm)
 
 EXTRACT() {
     local src=$1
@@ -29,9 +29,4 @@ INSTALL() {
     pushd build
     make install -j$J
     popd
-}
-
-POST() {
-    ln -sf python3 $PREFIX/bin/python
-    ln -sf pip3 $PREFIX/bin/pip
 }
