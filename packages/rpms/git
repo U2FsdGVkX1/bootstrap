@@ -3,7 +3,7 @@ PKGVER=2.41.0
 URL="https://cdn.kernel.org/pub/software/scm/git/git-$PKGVER.tar.xz"
 SOURCE=${URL##*/}
 SHA256SUM=e748bafd424cfe80b212cbc6f1bbccc3a47d4862fb1eb7988877750478568040
-DEPENDS=(curl)
+DEPENDS=(gettext curl)
 
 EXTRACT() {
     local src=$1
