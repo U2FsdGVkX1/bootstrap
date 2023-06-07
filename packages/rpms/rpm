@@ -34,4 +34,5 @@ INSTALL() {
 POST() {
     echo "mockbuild:x:1000:1000:::/bin/rpm" >> /etc/passwd
     echo "mock:x:135:mockbuild" >> /etc/group
+    echo "127.0.0.1 $(hostname)" >> /etc/hosts
 }
