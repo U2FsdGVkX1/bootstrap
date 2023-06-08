@@ -1,0 +1,32 @@
+PKGNAME=automake
+PKGVER=1.16.5
+URL="https://ftpmirror.gnu.org/gnu/automake/automake-$PKGVER.tar.xz"
+SOURCE=${URL##*/}
+SHA256SUM=f01d58cd6d9d77fbdca9eb4bbd5ead1988228fdb73d6f7a201f5f8d6b118b469
+DEPENDS=(wget)
+
+EXTRACT() {
+    local src=$1
+    if [ ! -f configure ]; then
+        tar --strip-components 1 -xf $src
+    fi
+}
+
+PREPARE() {
+    rm -rf build && mkdir -p build
+    pushd build
+    ../configure --prefix=/usr
+    popd
+}
+
+BUILD() {
+    pushd build
+    make -j$J
+    popd
+}
+
+INSTALL() {
+    pushd build
+    make install -j$J
+    popd
+}
