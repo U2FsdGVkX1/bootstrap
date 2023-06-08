@@ -35,7 +35,7 @@ stage3: config.sh
 config.sh: .config
 	@rm -rf $@
 	@ARCH=$$(grep "^CONFIG_ARCH_.*=y" $< | sed "s/^CONFIG_ARCH_\(.*\)=y/\1/" | tr '[:upper:]' '[:lower:]'); \
-	echo "ARCH=$$ARCH-linux-gnu" >> config.sh;
+	echo "ARCH=$$ARCH-unknown-linux-gnu" >> config.sh;
 
 .config:
 	$(error Please run menuconfig first)
