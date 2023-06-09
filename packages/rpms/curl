@@ -3,7 +3,7 @@ PKGVER=8.1.2
 URL="https://curl.se/download/curl-$PKGVER.tar.xz"
 SOURCE=${URL##*/}
 SHA256SUM=31b1118eb8bfd43cd95d9a3f146f814ff874f6ed3999b29d94f4d1e7dbac5ef6
-DEPENDS=(wget)
+DEPENDS=(pkg-config openssl)
 
 EXTRACT() {
     local src=$1

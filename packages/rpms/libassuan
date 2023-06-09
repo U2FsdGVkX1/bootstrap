@@ -1,9 +1,9 @@
-PKGNAME=ncurses
-PKGVER=6.4
-URL="https://ftpmirror.gnu.org/gnu/ncurses/ncurses-$PKGVER.tar.gz"
+PKGNAME=libassuan
+PKGVER=2.5.5
+URL="https://gnupg.org/ftp/gcrypt/libassuan/libassuan-$PKGVER.tar.bz2"
 SOURCE=${URL##*/}
-SHA256SUM=6931283d9ac87c5073f30b6290c4c75f21632bb4fc3603ac8100812bed248159
-DEPENDS=(pkg-config)
+SHA256SUM=8e8c2fcc982f9ca67dcbb1d95e2dc746b1739a4668bc20b3a3c5be632edb34e4
+DEPENDS=(pkg-config libgpg-error)
 
 EXTRACT() {
     local src=$1
@@ -15,7 +15,7 @@ EXTRACT() {
 PREPARE() {
     rm -rf build && mkdir -p build
     pushd build
-    ../configure --prefix=/usr
+    ../configure --build=$ARCH --prefix=/usr
     popd
 }
 

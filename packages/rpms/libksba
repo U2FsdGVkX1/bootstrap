@@ -1,9 +1,9 @@
-PKGNAME=ncurses
-PKGVER=6.4
-URL="https://ftpmirror.gnu.org/gnu/ncurses/ncurses-$PKGVER.tar.gz"
+PKGNAME=libksba
+PKGVER=1.6.3
+URL="https://gnupg.org/ftp/gcrypt/libksba/libksba-$PKGVER.tar.bz2"
 SOURCE=${URL##*/}
-SHA256SUM=6931283d9ac87c5073f30b6290c4c75f21632bb4fc3603ac8100812bed248159
-DEPENDS=(pkg-config)
+SHA256SUM=3f72c68db30971ebbf14367527719423f0a4d5f8103fc9f4a1c01a9fa440de5c
+DEPENDS=(pkg-config libgpg-error)
 
 EXTRACT() {
     local src=$1
@@ -15,7 +15,7 @@ EXTRACT() {
 PREPARE() {
     rm -rf build && mkdir -p build
     pushd build
-    ../configure --prefix=/usr
+    ../configure --build=$ARCH --prefix=/usr
     popd
 }
 
