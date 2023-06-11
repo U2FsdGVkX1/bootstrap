@@ -28,8 +28,8 @@ case $ARCH in
     x86_64*)
         linuxarch="x86_64"
         ;;
-    x86*)
-        linuxarch="x86"
+    i386*)
+        linuxarch="i386"
         ;;
     aarch64*)
         linuxarch="aarch64"
