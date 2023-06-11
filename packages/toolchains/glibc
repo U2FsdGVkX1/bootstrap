@@ -43,7 +43,7 @@ INSTALL() {
 
 POST() {
     if [ $STAGE == 2 ]; then
-        ld=$(basename $PREFIX/lib/ld-linux)
+        ld=$(basename $PREFIX/lib/ld-linux*)
         ln -sf ../lib/$ld $PREFIX/lib64/$ld
         
         echo "/lib" >> $PREFIX/etc/ld.so.conf
