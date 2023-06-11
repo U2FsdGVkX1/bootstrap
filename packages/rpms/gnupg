@@ -30,3 +30,8 @@ INSTALL() {
     make install -j$J
     popd
 }
+
+POST() {
+    ln -sf gpg gpg2
+    ln -sf gpgv gpgv2
+}
