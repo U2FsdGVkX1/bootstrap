@@ -29,7 +29,7 @@ stage3: config.sh
 	@ln -sf ../packages/rpms/{zlib,perl,openssl,wget,pkg-config,curl} $(ROOT)/stage3/
 	@ln -sf ../packages/rpms/{gettext,ncurses,git,autoconf,automake,bzip2} $(ROOT)/stage3/
 	@ln -sf ../packages/rpms/{libgpg-error,libgcrypt,libassuan,libksba,npth,gnupg} $(ROOT)/stage3/
-	@ln -sf ../packages/rpms/{popt,libarchive,sqlite,lua,python,rpm} $(ROOT)/stage3/
+	@ln -sf ../packages/rpms/{libffi,popt,libarchive,sqlite,lua,python,rpm} $(ROOT)/stage3/
 	@ln -sf ../packages/rpms/{help2man,rpmdevtools} $(ROOT)/stage3/
 	@bash -e build.sh "" 3
 
