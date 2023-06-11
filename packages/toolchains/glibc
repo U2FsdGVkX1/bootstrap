@@ -20,13 +20,9 @@ EXTRACT() {
 PREPARE() {
     rm -rf build && mkdir -p build
     pushd build
-    if [ $STAGE == 1 ]; then
-        export CXX=$ARCH-gcc
-        ../configure --host=$ARCH --prefix=/usr --with-headers=$PREFIX/usr/include \
-                     libc_cv_slibdir=/usr/lib
-    elif [ $STAGE == 2 ]; then
-        ../configure --host=$ARCH --prefix=/usr --with-headers=$PREFIX/usr/include
-    fi
+    export CXX=$ARCH-gcc
+    ../configure --host=$ARCH --prefix=/usr --with-headers=$PREFIX/usr/include \
+                 libc_cv_slibdir=/usr/lib
     popd
 }
 
