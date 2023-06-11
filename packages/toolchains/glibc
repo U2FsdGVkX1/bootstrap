@@ -42,6 +42,8 @@ INSTALL() {
 }
 
 POST() {
+    local ld=$(basename $PREFIX/lib/ld-linux*)
+    ln -sf ../lib/$ld $PREFIX/lib64/$ld
     if [ $STAGE == 2 ]; then
         echo "/lib" >> $PREFIX/etc/ld.so.conf
         echo "/lib64" >> $PREFIX/etc/ld.so.conf
