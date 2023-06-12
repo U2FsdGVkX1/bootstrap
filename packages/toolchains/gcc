@@ -2,6 +2,7 @@ PKGNAME=gcc
 PKGVER=13.1.0
 URL="https://ftpmirror.gnu.org/gnu/gcc/gcc-$PKGVER/gcc-$PKGVER.tar.xz"
 SOURCE=${URL##*/}
+# SOURCE=gcc-13.1.1-20230511.tar.xz
 SHA256SUM=61d684f0aa5e76ac6585ad8898a2427aade8979ed5e7f85492286c4dfc13ee86
 DEPENDS=(binutils glibc)
 
@@ -14,14 +15,16 @@ EXTRACT() {
 }
 
 PREPARE() {
+    echo 'Red Hat 13.1.1-2' > gcc/DEV-PHASE
+
     rm -rf build && mkdir -p build
     pushd build
     if [ $STAGE == 1 ]; then
         ../configure --target=$ARCH --prefix=$PREFIX --with-sysroot=$PREFIX \
-                     --disable-multilib --disable-nls --disable-bootstrap --enable-languages=c,c++
+                     --disable-multilib --disable-nls --disable-bootstrap --enable-languages=c,c++ --enable-default-pie
     else
         ../configure --host=$ARCH --target=$ARCH --prefix=/usr --with-build-sysroot=$PREFIX \
-                     --disable-multilib --disable-nls --disable-bootstrap --enable-languages=c,c++
+                     --disable-multilib --disable-nls --disable-bootstrap --enable-languages=c,c++ --enable-default-pie
     fi
     popd
 }
