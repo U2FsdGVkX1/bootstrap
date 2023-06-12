@@ -16,6 +16,13 @@ EXTRACT() {
 }
 
 PREPARE() {
+    # patch
+    if [ ! -f binutils-export-demangle.h.patch ]; then
+        download https://src.fedoraproject.org/rpms/binutils/raw/rawhide/f/binutils-export-demangle.h.patch binutils-export-demangle.h.patch
+        patch -p1 < binutils-export-demangle.h.patch
+    fi
+
+    # build
     rm -rf build && mkdir -p build
     pushd build
     if [ $STAGE == 1 ]; then
