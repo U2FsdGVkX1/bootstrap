@@ -6,7 +6,7 @@ menuconfig:
 	~/.local/bin/menuconfig $(ROOT)/Kconfig
 
 clean:
-	@rm -rf build src tools sysroot
+	@rm -rf build tools sysroot
 	@rm -rf .config .config.old config.sh
 	@rm -rf stage1 stage2 stage3
 
