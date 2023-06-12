@@ -32,6 +32,6 @@ INSTALL() {
 }
 
 POST() {
-    ln -sf gpg gpg2
-    ln -sf gpgv gpgv2
+    ln -sf gpg $PREFIX/bin/gpg2
+    ln -sf gpgv $PREFIX/bin/gpgv2
 }
