@@ -35,13 +35,19 @@ BUILD() {
 INSTALL() {
     pushd build
     make DESTDIR=$PREFIX install -j$J
-    if [ $STAGE == 2 ]; then
-        make DESTDIR=$PREFIX SUPPORTED-LOCALES=en_US.UTF-8/UTF-8 localedata/install-locales
-    fi
     popd
 }
 
 POST() {
+    if [ $STAGE == 2 ]; then
+        rm -rf build && mkdir -p build
+        pushd build
+        ../configure --prefix=/usr libc_cv_slibdir=/usr/lib
+        make -j$J
+        make DESTDIR=$PREFIX SUPPORTED-LOCALES=en_US.UTF-8/UTF-8 localedata/install-locales
+        popd
+    fi
+
     if [ $STAGE == 2 ]; then
         ld=$(basename $PREFIX/lib/ld-linux*)
         ln -sf ../lib/$ld $PREFIX/lib64/$ld
