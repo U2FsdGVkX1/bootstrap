@@ -22,7 +22,7 @@ PREPARE() {
     pushd build
     export CXX=$ARCH-gcc
     ../configure --host=$ARCH --prefix=/usr --with-headers=$PREFIX/usr/include \
-                 libc_cv_slibdir=/usr/lib
+                 --libdir=/usr/lib libc_cv_slibdir=/usr/lib
     popd
 }
 
@@ -42,7 +42,7 @@ POST() {
     if [ $STAGE == 2 ]; then
         rm -rf build && mkdir -p build
         pushd build
-        ../configure --prefix=/usr libc_cv_slibdir=/usr/lib
+        ../configure --prefix=/usr --libdir=/usr/lib
         make -j$J
         make DESTDIR=$PREFIX SUPPORTED-LOCALES=en_US.UTF-8/UTF-8 localedata/install-locales
         popd
