@@ -18,7 +18,5 @@ BUILD() {
 }
 
 INSTALL() {
-    pushd build
     make prefix=/usr install -j$J
-    popd
 }
