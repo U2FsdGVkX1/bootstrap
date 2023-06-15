@@ -18,7 +18,7 @@ stage1: config.sh
 stage2: stage1 config.sh
 	@mkdir -p $(ROOT)/stage2
 	@ln -sf ../packages/base/{rootfs,m4,coreutils,diffutils,findutils} $(ROOT)/stage2/
-	@ln -sf ../packages/base/{gawk,grep,gzip,xz,zstd,tar,patch,sed,file,bash,make,wget-lite} $(ROOT)/stage2/
+	@ln -sf ../packages/base/{gawk,grep,gzip,xz,tar,patch,sed,file,bash,make,wget-lite} $(ROOT)/stage2/
 	@ln -sf ../packages/toolchains/{linux-headers,binutils,glibc,gcc} $(ROOT)/stage2/
 	@bash -e build.sh "" 2
 	@mkdir -p sysroot/bootstrap
@@ -27,7 +27,7 @@ stage2: stage1 config.sh
 stage3: config.sh
 	@mkdir -p $(ROOT)/stage3
 	@ln -sf ../packages/rpms/{zlib,perl,openssl,wget,pkg-config,curl} $(ROOT)/stage3/
-	@ln -sf ../packages/rpms/{gettext,ncurses,git,autoconf,automake,bzip2} $(ROOT)/stage3/
+	@ln -sf ../packages/rpms/{gettext,ncurses,git,autoconf,automake,bzip2,zstd} $(ROOT)/stage3/
 	# @ln -sf ../packages/rpms/{libgpg-error,libgcrypt,libassuan,libksba,npth,gnupg} $(ROOT)/stage3/
 	@ln -sf ../packages/rpms/{libgpg-error,libgcrypt} $(ROOT)/stage3/
 	@ln -sf ../packages/rpms/{libffi,popt,libarchive,sqlite,lua,python,rpm} $(ROOT)/stage3/
