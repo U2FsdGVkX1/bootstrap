@@ -1,6 +1,7 @@
 PKGNAME=zstd
 PKGVER=1.5.5
-URL="https://github.com/facebook/zstd/releases/download/v$PKGVER/zstd-$PKGVER.tar.gz"
+# URL="https://github.com/facebook/zstd/releases/download/v$PKGVER/zstd-$PKGVER.tar.gz"
+URL="https://src.fedoraproject.org/repo/pkgs/zstd/zstd-$PKGVER.tar.gz/sha512/99109ec0e07fa65c2101c9cb36be56b672bbd0ee69d265f924718e61f9192ae8385c8d9e4d0c318be9edfa6d849fd3d60e5f164fa120961449429ea3c5dab6b6/zstd-$PKGVER.tar.gz"
 SOURCE=${URL##*/}
 SHA256SUM=9c4396cc829cfae319a6e2615202e82aad41372073482fce286fac78646d3ee4
 DEPENDS=(pkg-config)
