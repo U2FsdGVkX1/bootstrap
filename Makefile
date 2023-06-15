@@ -18,7 +18,7 @@ stage1: config.sh
 stage2: stage1 config.sh
 	@mkdir -p $(ROOT)/stage2
 	@ln -sf ../packages/base/{rootfs,m4,coreutils,diffutils,findutils} $(ROOT)/stage2/
-	@ln -sf ../packages/base/{gawk,grep,gzip,xz,tar,patch,sed,file,bash,make,wget-lite} $(ROOT)/stage2/
+	@ln -sf ../packages/base/{gawk,grep,gzip,xz,zstd,tar,patch,sed,file,bash,make,wget-lite} $(ROOT)/stage2/
 	@ln -sf ../packages/toolchains/{linux-headers,binutils,glibc,gcc} $(ROOT)/stage2/
 	@bash -e build.sh "" 2
 	@mkdir -p sysroot/bootstrap

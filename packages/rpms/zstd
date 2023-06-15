@@ -1,0 +1,23 @@
+PKGNAME=zstd
+PKGVER=1.5.5
+URL="https://github.com/facebook/zstd/releases/download/v$PKGVER/zstd-$PKGVER.tar.gz"
+SOURCE=${URL##*/}
+SHA256SUM=9c4396cc829cfae319a6e2615202e82aad41372073482fce286fac78646d3ee4
+DEPENDS=(pkg-config)
+
+EXTRACT() {
+    local src=$1
+    if [ ! -f Makefile ]; then
+        tar --strip-components 1 -xf $src
+    fi
+}
+
+BUILD() {
+    make prefix=/usr -j$J
+}
+
+INSTALL() {
+    pushd build
+    make prefix=/usr install -j$J
+    popd
+}
