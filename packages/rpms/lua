@@ -24,7 +24,8 @@ BUILD() {
 }
 
 INSTALL() {
-    make INSTALL_TOP=/usr TO_LIB="liblua.a liblua.so" install -j$J
+    make INSTALL_TOP=/usr TO_LIB="liblua.a liblua.so liblua.so.$PKGVER" \
+         install -j$J
 }
 
 POST() {
