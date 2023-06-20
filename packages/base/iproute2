@@ -1,0 +1,28 @@
+PKGNAME=iproute2
+PKGVER=6.3.0
+URL="https://cdn.kernel.org/pub/linux/utils/net/iproute2/iproute2-$PKGVER.tar.xz"
+SOURCE=${URL##*/}
+SHA256SUM=dfb2a98db96e7a653cffc6693335a1a466e29a34b6ac528be48f35e1d2766732
+DEPENDS=(rootfs)
+
+EXTRACT() {
+    local src=$1
+    if [ ! -f configure ]; then
+        tar --strip-components 1 -xf $src
+    fi
+}
+
+PREPARE() {
+    make clean
+    export CC=$ARCH-gcc
+    export PKG_CONFIG=false
+    ./configure --prefix=/usr
+}
+
+BUILD() {
+    make -j$J
+}
+
+INSTALL() {
+    make DESTDIR=$PREFIX install -j$J
+}
