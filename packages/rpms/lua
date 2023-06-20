@@ -9,7 +9,13 @@ EXTRACT() {
     local src=$1
     if [ ! -f configure ]; then
         tar --strip-components 1 -xf $src
-        sed -i '/#define LUA_ROOT/s:/usr/local/:/usr/:' src/luaconf.h
+    fi
+}
+
+PREPARE() {
+    if [ ! -f liblua.so.patch ]; then
+        download https://gitlab.archlinux.org/archlinux/packaging/packages/lua/-/raw/main/liblua.so.patch liblua.so.patch
+        patch -p1 < liblua.so.patch
     fi
 }
 
