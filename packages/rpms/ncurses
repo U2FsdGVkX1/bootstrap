@@ -15,7 +15,7 @@ EXTRACT() {
 PREPARE() {
     rm -rf build && mkdir -p build
     pushd build
-    ../configure --prefix=/usr --with-shared
+    ../configure --prefix=/usr --with-shared --with-termlib=tinfo
     popd
 }
 
