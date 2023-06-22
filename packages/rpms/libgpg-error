@@ -15,7 +15,7 @@ EXTRACT() {
 PREPARE() {
     rm -rf build && mkdir -p build
     pushd build
-    ../configure --prefix=/usr
+    ../configure --prefix=/usr --enable-install-gpg-error-config
     popd
 }
 
