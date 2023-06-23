@@ -1,0 +1,32 @@
+PKGNAME=util-linux
+PKGVER=2.39
+URL="https://mirrors.edge.kernel.org/pub/linux/utils/util-linux/v$PKGVER/util-linux-$PKGVER.tar.xz"
+SOURCE=${URL##*/}
+SHA256SUM=32b30a336cda903182ed61feb3e9b908b762a5e66fe14e43efb88d37162075cb
+DEPENDS=(pkg-config python)
+
+EXTRACT() {
+    local src=$1
+    if [ ! -f configure ]; then
+        tar --strip-components 1 -xf $src
+    fi
+}
+
+PREPARE() {
+    rm -rf build && mkdir -p build
+    pushd build
+    ../configure --prefix=/usr
+    popd
+}
+
+BUILD() {
+    pushd build
+    make -j$J
+    popd
+}
+
+INSTALL() {
+    pushd build
+    make install -j$J
+    popd
+}
