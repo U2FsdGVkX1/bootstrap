@@ -9,10 +9,12 @@ INSTALL() {
     sudo mknod $PREFIX/dev/random c 1 8
     sudo mknod $PREFIX/dev/urandom c 1 9
 
-    echo "nameserver 1.1.1.1" > $PREFIX/etc/resolv.conf
+    echo "root:x:0:" > $PREFIX/etc/group
     echo "tty:x:5:" >> $PREFIX/etc/group
     echo "mock:x:135:mockbuild" >> $PREFIX/etc/group
+    echo "root:x:0:0:root:/root:/bin/bash" > $PREFIX/etc/passwd
     echo "mockbuild:x:1000:1000:::/bin/rpm" >> $PREFIX/etc/passwd
+    echo "nameserver 1.1.1.1" > $PREFIX/etc/resolv.conf
 
     mkdir -p $PREFIX/usr/{bin,sbin,lib,lib64}
     ln -sf usr/bin $PREFIX/bin
