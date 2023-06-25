@@ -15,7 +15,8 @@ EXTRACT() {
 PREPARE() {
     rm -rf build1 && mkdir -p build1
     pushd build1
-    ../configure --prefix=/usr --enable-python
+    ../configure --prefix=/usr --enable-python \
+                 --sysconfdir=/etc --localstatedir=/var
     popd
 }
 
