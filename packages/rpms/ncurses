@@ -15,7 +15,8 @@ EXTRACT() {
 PREPARE() {
     rm -rf build && mkdir -p build
     pushd build
-    ../configure --prefix=/usr --with-shared --with-termlib=tinfo --enable-pc-files
+    ../configure --prefix=/usr --with-shared --with-termlib=tinfo \
+                 --enable-pc-files --enable-widec
     popd
 }
 
@@ -29,4 +30,8 @@ INSTALL() {
     pushd build
     make install -j$J
     popd
+}
+
+POST() {
+    echo "INPUT(-lncursesw)" > /usr/lib/libncurses.so
 }
