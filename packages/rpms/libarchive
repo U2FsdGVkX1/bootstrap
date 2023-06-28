@@ -30,3 +30,7 @@ INSTALL() {
     make install -j$J
     popd
 }
+
+POST() {
+    sed -i 's/Requires.private:.*iconv/Requires.private:/' /usr/lib/pkgconfig/libarchive.pc
+}
