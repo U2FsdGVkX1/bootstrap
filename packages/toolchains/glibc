@@ -40,15 +40,6 @@ INSTALL() {
 
 POST() {
     if [ $STAGE == 2 ]; then
-        rm -rf build && mkdir -p build
-        pushd build
-        ../configure --prefix=/usr --libdir=/usr/lib
-        make -j$J
-        make DESTDIR=$PREFIX SUPPORTED-LOCALES=en_US.UTF-8/UTF-8 localedata/install-locales
-        popd
-    fi
-
-    if [ $STAGE == 2 ]; then
         ld=$(basename $PREFIX/lib/ld-linux*)
         ln -sf ../lib/$ld $PREFIX/lib64/$ld
         

@@ -1,0 +1,9 @@
+PKGNAME=locale
+PKGVER=1.0
+DEPENDS=()
+
+INSTALL() {
+    mkdir -p /usr/lib/locale
+    localedef -i en_US -f ISO-8859-1 en_US
+    localedef -i en_US -f UTF-8 en_US.UTF-8
+}

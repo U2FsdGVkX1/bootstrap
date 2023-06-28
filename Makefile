@@ -26,8 +26,8 @@ stage2: stage1 config.sh
 
 stage3: config.sh
 	@mkdir -p $(ROOT)/stage3
-	@ln -sf ../packages/rpms/{zlib,perl,openssl,wget,pkg-config,curl} $(ROOT)/stage3/
-	@ln -sf ../packages/rpms/{util-linux,gettext,ncurses,git,autoconf,automake,bzip2,zstd} $(ROOT)/stage3/
+	@ln -sf ../packages/rpms/{locale,zlib,perl,openssl,wget,pkg-config,curl} $(ROOT)/stage3/
+	@ln -sf ../packages/rpms/{util-linux,gettext,git,bzip2,zstd} $(ROOT)/stage3/
 	# @ln -sf ../packages/rpms/{libgpg-error,libgcrypt,libassuan,libksba,npth,gnupg} $(ROOT)/stage3/
 	@ln -sf ../packages/rpms/{libgpg-error,libgcrypt} $(ROOT)/stage3/
 	@ln -sf ../packages/rpms/{libffi,popt,libarchive,sqlite,lua,python,rpm} $(ROOT)/stage3/
