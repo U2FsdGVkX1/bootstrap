@@ -17,6 +17,7 @@ PREPARE() {
 }
 
 BUILD() {
+    make -j$J || true # todo fix
     make -j$J
 }
 
