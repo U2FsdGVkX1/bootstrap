@@ -17,7 +17,7 @@ PREPARE() {
 }
 
 BUILD() {
-    make -j$J || true # todo fix
+    rm -rf gitk-git/po/*.po
     make -j$J
 }
 
