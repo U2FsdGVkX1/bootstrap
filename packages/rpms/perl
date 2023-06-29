@@ -13,9 +13,14 @@ EXTRACT() {
 }
 
 PREPARE() {
+    local LIB_DIR=$( [ $(getconf LONG_BIT) = "64" ] && echo "/usr/lib64" || echo "/usr/lib" )
     make clean || true
     ./Configure -des -Dprefix=/usr \
                      -Dvendorprefix=/usr \
+                     -Dprivlib="/usr/share/perl5" \
+                     -Darchlib="$LIB_DIR" \
+                     -Dvendorlib="/usr/share/perl5/vendor_perl" \
+                     -Dvendorarch="$LIB_DIR/perl5/vendor_perl" \
                      -Dman1dir=/usr/share/man/man1 \
                      -Dman3dir=/usr/share/man/man3
 }
