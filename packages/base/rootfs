@@ -8,6 +8,10 @@ INSTALL() {
     sudo mknod $PREFIX/dev/zero c 1 5
     sudo mknod $PREFIX/dev/random c 1 8
     sudo mknod $PREFIX/dev/urandom c 1 9
+    ln -s /proc/self/fd $PREFIX/dev/fd
+    ln -s /proc/self/fd/0 $PREFIX/dev/stdin
+    ln -s /proc/self/fd/1 $PREFIX/dev/stdout
+    ln -s /proc/self/fd/2 $PREFIX/dev/stderr
 
     echo "root:x:0:" > $PREFIX/etc/group
     echo "tty:x:5:" >> $PREFIX/etc/group
