@@ -8,7 +8,6 @@ DEPENDS=(perl)
 EXTRACT() {
     local src=$1
     if [ ! -f config ]; then
-
         tar --strip-components 1 -xf $src
     fi
 }
