@@ -8,14 +8,22 @@ DEPENDS=(perl)
 EXTRACT() {
     local src=$1
     if [ ! -f config ]; then
+
         tar --strip-components 1 -xf $src
     fi
 }
 
 PREPARE() {
+    # patch
+    if [ ! -f add-fips.h.patch ]; then
+        download https://src.fedoraproject.org/rpms/openssl/raw/rawhide/f/0008-Add-FIPS_mode-compatibility-macro.patch add-fips.h.patch
+        patch -p1 < add-fips.h.patch
+    fi
+
+    # build
     rm -rf build && mkdir -p build
     pushd build
-    ../config --prefix=/usr --openssldir=/etc/ssl shared
+    ../config --prefix=/usr --openssldir=/etc/ssl shared enable-fips
     popd
 }
 
