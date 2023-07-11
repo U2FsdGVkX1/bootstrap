@@ -24,7 +24,7 @@ PREPARE() {
                      --disable-multilib --disable-nls --disable-bootstrap --enable-languages=c,c++ --enable-default-pie
     else
         ../configure --host=$ARCH --target=$ARCH --prefix=/usr --with-build-sysroot=$PREFIX \
-                     --disable-multilib --disable-nls --disable-bootstrap --enable-languages=c,c++ --enable-default-pie
+                     --disable-multilib --disable-nls --disable-bootstrap --enable-languages=c,c++ --enable-default-pie --enable-host-shared --enable-languages=jit
     fi
     popd
 }
