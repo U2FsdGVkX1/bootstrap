@@ -14,10 +14,9 @@ EXTRACT() {
 
 PREPARE() {
     if [ ! -f lua-5.4.0-beta-autotoolize.patch ]; then
+        mv src/luaconf.h src/luaconf.h.template.in
         download https://src.fedoraproject.org/rpms/lua/raw/rawhide/f/lua-5.4.0-beta-autotoolize.patch lua-5.4.0-beta-autotoolize.patch
         patch -p1 < lua-5.4.0-beta-autotoolize.patch
-
-        mv src/luaconf.h src/luaconf.h.template.in
         sed -i "s/5.4.0/$PKGVER/g" configure.ac
     fi
     if [ ! -f lua-5.2.2-configure-linux.patch ]; then
