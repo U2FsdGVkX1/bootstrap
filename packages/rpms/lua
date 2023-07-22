@@ -7,48 +7,31 @@ DEPENDS=(pkg-config)
 
 EXTRACT() {
     local src=$1
-    if [ ! -f configure ]; then
+    if [ ! -f Makefile ]; then
         tar --strip-components 1 -xf $src
     fi
 }
 
 PREPARE() {
-    if [ ! -f liblua.so.patch ]; then
-        download https://gitlab.archlinux.org/archlinux/packaging/packages/lua/-/raw/main/liblua.so.patch liblua.so.patch
-        patch -p1 < liblua.so.patch
+    if [ ! -f lua-5.4.0-beta-autotoolize.patch ]; then
+        download https://src.fedoraproject.org/rpms/lua/raw/rawhide/f/lua-5.4.0-beta-autotoolize.patch lua-5.4.0-beta-autotoolize.patch
+        patch -p1 < lua-5.4.0-beta-autotoolize.patch
+
+        mv src/luaconf.h src/luaconf.h.template.in
+        sed -i "s/5.4.0/$PKGVER/g" configure.ac
     fi
+    if [ ! -f lua-5.2.2-configure-linux.patch ]; then
+        download https://src.fedoraproject.org/rpms/lua/raw/rawhide/f/lua-5.2.2-configure-linux.patch lua-5.2.2-configure-linux.patch
+        patch -p1 < lua-5.2.2-configure-linux.patch
+    fi
+    autoreconf -ifv
+    ./configure --prefix=/usr
 }
 
 BUILD() {
-    make MYCFLAGS="-fPIC" linux -j$J
+    make -j$J
 }
 
 INSTALL() {
-    make INSTALL_TOP=/usr TO_LIB="liblua.a liblua.so liblua.so.$PKGVER" \
-         install -j$J
-}
-
-POST() {
-    cat > /usr/lib/pkgconfig/lua.pc << "EOF"
-V=5.4
-R=5.4.6
-
-prefix=/usr
-INSTALL_BIN=${prefix}/bin
-INSTALL_INC=${prefix}/include
-INSTALL_LIB=${prefix}/lib
-INSTALL_MAN=${prefix}/share/man/man1
-INSTALL_LMOD=${prefix}/share/lua/${V}
-INSTALL_CMOD=${prefix}/lib/lua/${V}
-exec_prefix=${prefix}
-libdir=${exec_prefix}/lib
-includedir=${prefix}/include
-
-Name: Lua
-Description: An Extensible Extension Language
-Version: ${R}
-Requires:
-Libs: -L${libdir} -llua -lm -ldl
-Cflags: -I${includedir}
-EOF
+    make install -j$J
 }
